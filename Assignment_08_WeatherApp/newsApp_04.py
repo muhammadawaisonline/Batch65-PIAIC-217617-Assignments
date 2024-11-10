@@ -65,9 +65,9 @@ def main():
     articles = fetch_bbc_news()
     st.write("Select Data and Category to find Articles")
 
-    # if not articles:
-    #     st.write("No articles found!")
-    #     return
+    if not articles:
+        st.write("No articles found!")
+        return
 
     # Convert the list of articles to a Pandas DataFrame for easy filtering
     df = pd.DataFrame(articles)
@@ -78,6 +78,21 @@ def main():
 
     # Add a date filter widget
     filter_date = st.sidebar.date_input('Filter by Date (optional)', None)
+
+
+    st.write("### Article Details")
+    for article in articles:
+        st.write(f"**[{article['Title']}]({article['Link']})**")
+        st.write(f"Summary: {article['Summary']}")
+        st.write(f"Published on: {article['Date']}")
+        st.markdown('---')
+
+
+
+
+
+
+
 
     if filter_date:
         # Convert the 'Date' column to datetime to compare with the selected date
@@ -109,12 +124,7 @@ def main():
         st.write(df)
 
     # Display individual article details with clickable links
-    st.write("### Article Details")
-    for article in articles:
-        st.write(f"**[{article['Title']}]({article['Link']})**")
-        st.write(f"Summary: {article['Summary']}")
-        st.write(f"Published on: {article['Date']}")
-        st.markdown('---')
+    
 
 # Run the main function
 if __name__ == "__main__":
