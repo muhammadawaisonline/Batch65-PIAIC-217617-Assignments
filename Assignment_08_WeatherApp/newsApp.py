@@ -28,7 +28,7 @@ def fetch_bbc_news():
     # Look for article blocks by the correct class
     # BBC News uses a "gs-c-promo" class for promo content
     for item in soup.find_all('div', class_='gs-c-promo'):
-        title_tag = item.find('h3')
+        title_tag = item.find('h2')
         if title_tag:
             title = title_tag.get_text(strip=True)
         else:
